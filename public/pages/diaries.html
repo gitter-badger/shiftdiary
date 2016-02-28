@@ -1,0 +1,77 @@
+
+<h2>Diaries</h2>
+<!-- Table-to-load-the-data Part -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Topic</th>
+			<th>Employee</th>
+			<th><button id="btn-add" class="btn btn-primary btn-xs"
+					ng-click="toggle('add', 0)">Add New Diary</button></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="diary in diaries">
+			<td>{{ diary.id }}</td>
+			<td>{{ diary.topic }}</td>
+			<td>{{ diary.employee_id }}</td>
+			<td>
+				<button class="btn btn-default btn-xs btn-detail"
+					ng-click="toggle('edit', diary.id)">Edit</button>
+				<button class="btn btn-danger btn-xs btn-delete"
+					ng-click="confirmDelete(diary.id)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- End of Table-to-load-the-data Part -->
+<!-- Modal (Pop up when detail button clicked) -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">{{form_title}}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="frmDiaries" class="form-horizontal" novalidate="">
+
+					<div class="form-group error">
+						<label for="inputEmail3" class="col-sm-3 control-label">Topic</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control has-error" id="topic"
+								name="topic" placeholder="Topic" value="{{topic}}"
+								ng-model="diary.topic" ng-required="true"> <span
+								class="help-inline"
+								ng-show="frmDiaries.topic.$invalid && frmDiaries.topic.$touched">Topic
+								field is required</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Employee</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="employee_id"
+								name="employee_id" placeholder="Employee"
+								value="{{employee_id}}" ng-model="diary.employee_id"
+								ng-required="true"> <span class="help-inline"
+								ng-show="frmDiaries.employee_id.$invalid && frmDiaries.employee_id.$touched">Valid
+								Employee field is required</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="btn-save"
+					ng-click="save(modalstate, id)" ng-disabled="frmDiaries.$invalid">Save
+					changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

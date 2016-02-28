@@ -1,0 +1,75 @@
+
+<h2>Notification</h2>
+<!-- Table-to-load-the-data Part -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Diary ID</th>
+			<th>Employee ID</th>
+			<th><button id="btn-add" class="btn btn-primary btn-xs"
+					ng-click="toggle('add', 0)">Add New Notification</button></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="notification in notifications">
+			<td>{{ notification.id }}</td>
+			<td>{{ notification.diary_id }}</td>
+			<td>{{ notification.employee_id }}</td>
+			<td>
+				<button class="btn btn-default btn-xs btn-detail"
+					ng-click="toggle('edit', notification.id)">Edit</button>
+				<button class="btn btn-danger btn-xs btn-delete"
+					ng-click="confirmDelete(notification.id)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- End of Table-to-load-the-data Part -->
+<!-- Modal (Pop up when detail button clicked) -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">{{form_title}}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="frmNotifications" class="form-horizontal" novalidate="">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Diary</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="diary_id"
+								name="diary_id" placeholder="Diary id" value="{{diary_id}}"
+								ng-model="notification.diary_id" ng-required="true"> <span
+								class="help-inline"
+								ng-show="frmNotifications.diary_id.$invalid && frmNotifications.diary_id.$touched">Valid
+								Diary field is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Employee</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="employee_id"
+								name="employee_id" placeholder="Employee id"
+								value="{{employee_id}}" ng-model="notification.employee_id"
+								ng-required="true"> <span class="help-inline"
+								ng-show="frmNotifications.employee_id.$invalid && frmNotifications.employee_id.$touched">Valid
+								Employee id field is required</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="btn-save"
+					ng-click="save(modalstate, id)"
+					ng-disabled="frmNotifications.$invalid">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

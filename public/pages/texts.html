@@ -1,0 +1,90 @@
+
+<h2>Texts</h2>
+<!-- Table-to-load-the-data Part -->
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Diary ID</th>
+			<th>Text</th>
+			<th>Prioriry</th>
+			<th><button id="btn-add" class="btn btn-primary btn-xs"
+					ng-click="toggle('add', 0)">Add New Text</button></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="text in texts">
+			<td>{{ text.id }}</td>
+			<td>{{ text.diary_id }}</td>
+			<td>{{ text.text }}</td>
+			<td>{{ text.priority }}</td>
+			<td>
+				<button class="btn btn-default btn-xs btn-detail"
+					ng-click="toggle('edit', text.id)">Edit</button>
+				<button class="btn btn-danger btn-xs btn-delete"
+					ng-click="confirmDelete(text.id)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- End of Table-to-load-the-data Part -->
+<!-- Modal (Pop up when detail button clicked) -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">{{form_title}}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="frmTexts" class="form-horizontal" novalidate="">
+
+					<div class="form-group error">
+						<label for="inputEmail3" class="col-sm-3 control-label">Text</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control has-error" id="text"
+								name="text" placeholder="Text" value="{{text}}"
+								ng-model="text.text" ng-required="true"> <span
+								class="help-inline"
+								ng-show="frmTexts.text.$invalid && frmTexts.text.$touched">Text
+								field is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Priority</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="priority"
+								name="priority" placeholder="Priority" value="{{priority}}"
+								ng-model="text.priority" ng-required="true"> <span
+								class="help-inline"
+								ng-show="frmTexts.priority.$invalid && frmTexts.priority.$touched">Valid
+								Priority field is required</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-3 control-label">Diary</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="diary_id"
+								name="diary_id" placeholder="Diary id" value="{{diary_id}}"
+								ng-model="text.diary_id" ng-required="true"> <span
+								class="help-inline"
+								ng-show="frmTexts.diary_id.$invalid && frmTexts.diary_id.$touched">Valid
+								Diary field is required</span>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="btn-save"
+					ng-click="save(modalstate, id)" ng-disabled="frmTexts.$invalid">Save
+					changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Diary;
 use Log;
+use DateTime;
 
 class DiariesController extends Controller
 {
@@ -54,6 +55,10 @@ class DiariesController extends Controller
 		$diary->delete();
 		
 		return 'Diary ' . $id . ' successfully deleted.';
+	}
+	
+	public function daily() {
+		return Diary::orderBy('id', 'asc')->where('created_at', '>=', new DateTime('today'))->with('notifications')->with('texts')->get();
 	}
 	
 	

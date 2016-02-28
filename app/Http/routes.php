@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/api/v1/daily', 'DiariesController@daily');
 
 Route::get('/api/v1/employees/{id?}', 'EmployeesController@index');
 Route::post('/api/v1/employees', 'EmployeesController@store');
